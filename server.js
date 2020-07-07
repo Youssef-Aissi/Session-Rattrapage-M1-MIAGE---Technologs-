@@ -2,7 +2,7 @@
 let express = require('express'),
     app = express();
 
-// ---- EXPRESS JS - Framework
+// ---- Gestion Files System
 let fs = require('fs'),
 	path = require('path');
 
@@ -13,7 +13,8 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
-//let helpers = require('view-helpers'),
+// - Gestion des vues
+let helpers = require('./view-helpers'),
 	consolidate = require('consolidate');
 
 app.engine('html', consolidate['mustache']);
@@ -25,47 +26,79 @@ app.set('views',__dirname + '/templates');
 // ROUTES RESOURCES
 // ------------------------
 /////////////////////////////////////////
-app.get('/', (req,res)=>{
-	console.log('hello');
-res.status(200).json({"hello" : "world"});
+
+// --- Base de donnees
+let mongoose = require('mongoose');
+
+let database  = mongoose.connect("mongodb://localhost/bd",{
+    promiseLibrary: require('bluebird'),
+    useNewUrlParser: true
+});
+
+// --- Definition du models
+//--- Module dependencies
+const Schema	 	= mongoose.Schema;
+
+//------------------------------------------- Resources Schema
+let RecettePizzaSchema = new Schema({
+    nom      : String,
+    description		: String,
+    ingredients     : [{ 
+       					type: Schema.ObjectId, 
+       					ref: 'ingredient' }],
+    quantitéIngredients : [{
+    					type: String
+       					}]
+});
+
+let ingredientSchema = new Schema({
+    nom      : String,
+    mesure		: String,
+    description		: String,
+    tempsCuisson		: String
+   
+});
+
+mongoose.model('Pizza', RecettePizzaSchema);
+
+mongoose.model('ingredient', ingredientSchema);
+
+
+
+
+
+
+
+//Recuperer toutes les recettes
+
+app.get('/pizzas',(req, res)=>{
+	let pizza = mongoose.model('Pizza')
+	Pizza.find({}).then((result)=>{
+            res.status(200).json(result)
+        },(err)=>{
+            res.status(400).json(err)
+        })
 })
 
-var tmp = [{
-	"id" : "1",
-	"nom" : "aissi",
-	"prenom" : "youssef",
-	"ne" : "20176126"
-}];
+//Recuperer une recettes a partir de son nom
 
-//Recuperer un patient
-app.get('/patients',(req,res)=>{
-	res.status(200).json(tmp)
-})
-
-//creer un patient
-app.post('/patients',(req,res)=>{
-	tmp.push(req.body)
-	res.status(200).json(req.body)
+app.get('/pizzas/:nom',(req, res)=>{
+	let pizza = mongoose.model('Pizza')
+	Pizza.find({}).then((result)=>{
+            res.status(200).json(result)
+        },(err)=>{
+            res.status(400).json(err)
+        })
 })
 
-//retirer et afficher le premier patient
-app.get('/patients/:id',(req,res)=>{
-	res.status(200).json(tmp.pop())
-})
 
-//modifer un patient
-app.put('/patients/:id',(req,res)=>{
-	res.status(204).json()
-})
-//supp un patient
-app.delete('/patients/:id',(req,res)=>{
-	res.status(204).json()
-})
+
+
 // ------------------------
 // ROUTES VUES
 // ------------------------
 app.get('/',(req,res)=>{
-	res.render('helloWorld', {'message' : req.query.message})
+	res.render('affichePizzas', {'message' : req.query.message})
 })
 
 
@@ -73,6 +106,6 @@ app.get('/',(req,res)=>{
 // ------------------------
 // START SERVER
 // ------------------------
-app.listen(3011,function(){
-    console.info('HTTP server started on port 3011');
+app.listen(3000,function(){
+    console.info('HTTP server started on port 3000');
 });
