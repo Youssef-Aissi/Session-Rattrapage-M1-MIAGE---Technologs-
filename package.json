@@ -1,0 +1,26 @@
+{
+  "name": "session-rattrapage-m1-miage---technologs-",
+  "version": "1.0.0",
+  "description": "SUJET -A- Le thème choisi pour ce POC est les recettes de Pizza",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Youssef-Aissi/Session-Rattrapage-M1-MIAGE---Technologs-.git"
+  },
+  "author": "Youssef AISSI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Youssef-Aissi/Session-Rattrapage-M1-MIAGE---Technologs-/issues"
+  },
+  "homepage": "https://github.com/Youssef-Aissi/Session-Rattrapage-M1-MIAGE---Technologs-#readme",
+  "dependencies": {
+    "consolidate": "^0.15.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.22",
+    "mustache": "^3.0.1",
+    "nodemon": "^2.0.4"
+  }
+}

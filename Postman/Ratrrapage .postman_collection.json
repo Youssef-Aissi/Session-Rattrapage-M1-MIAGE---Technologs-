@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "c805fae5-8309-4e0b-950d-4e863c0c2d14",
+		"name": "Ratrrapage ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Afficher toutes les recettes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Afficher une pizza a partir de son nom",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
