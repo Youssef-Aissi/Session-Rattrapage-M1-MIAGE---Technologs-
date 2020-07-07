@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Youssef-Aissi/Session-Rattrapage-M1-MIAGE---Technologs-/issues"
   },
-  "homepage": "https://github.com/Youssef-Aissi/Session-Rattrapage-M1-MIAGE---Technologs-#readme"
+  "homepage": "https://github.com/Youssef-Aissi/Session-Rattrapage-M1-MIAGE---Technologs-#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
